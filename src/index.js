@@ -5,6 +5,7 @@ import usersRouter from "../src/routes/users.js";
 import hostsRouter from "../src/routes/hosts.js";
 import propertiesRouter from "../src/routes/properties.js";
 import amenitiesRouter from "../src/routes/amenities.js";
+import bookingsRouter from "../src/routes/bookings.js";
 //import jwtCheck from "../src/utils/jwtCheck.js";
 import errorHandler from "./utils/errorHandler.js";
 
@@ -21,6 +22,7 @@ app.use("/users", usersRouter);
 app.use("/hosts", hostsRouter);
 app.use("/properties", propertiesRouter);
 app.use("/amenities", amenitiesRouter);
+app.use("/bookings", bookingsRouter);
 
 app.use(errorHandler);
 
