@@ -4,6 +4,7 @@ import getPropertyById from "../services/properties/getPropertyById.js";
 import createProperty from "../services/properties/createProperty.js";
 import updateProperty from "../services/properties/updateProperty.js";
 import deleteProperty from "../services/properties/deleteProperty.js";
+import filterProperty from "../services/properties/filterProperties.js";
 import auth from "../utils/auth.js";
 
 const router = Router();
@@ -28,6 +29,23 @@ router.get("/:id", async (req, res, next) => {
         .json({ message: `could not find property with id ${id}!` });
     } else {
       res.status(200).json(property);
+    }
+  } catch (error) {
+    next(error);
+  }
+});
+
+router.get("/", async (req, res, next) => {
+  try {
+    const { location, pricePerNight, amenitis } = req.query;
+    const properties = await filterProperty(location, pricePerNight, amenitis);
+
+    if (!properties) {
+      res
+        .status(404)
+        .json({ message: `Not found any property with these requirements` });
+    } else {
+      res.status(200).json(properties);
     }
   } catch (error) {
     next(error);
