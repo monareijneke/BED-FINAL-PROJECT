@@ -4,7 +4,8 @@ import getPropertyById from "../services/properties/getPropertyById.js";
 import createProperty from "../services/properties/createProperty.js";
 import updateProperty from "../services/properties/updateProperty.js";
 import deleteProperty from "../services/properties/deleteProperty.js";
-import filterProperty from "../services/properties/filterProperties.js";
+import filterProperties from "../services/properties/filterProperties.js";
+import getPropertyWithAmenities from "../services/properties/getPropertyWithAmenities.js";
 import auth from "../utils/auth.js";
 
 const router = Router();
@@ -35,17 +36,17 @@ router.get("/:id", async (req, res, next) => {
   }
 });
 
-router.get("/", async (req, res, next) => {
+router.get("/:id/amenities", async (req, res, next) => {
   try {
-    const { location, pricePerNight, amenitis } = req.query;
-    const properties = await filterProperty(location, pricePerNight, amenitis);
+    const { id } = req.params;
+    const propertyAmenities = await getPropertyWithAmenities(id);
 
-    if (!properties) {
+    if (!propertyAmenities) {
       res
         .status(404)
         .json({ message: `Not found any property with these requirements` });
     } else {
-      res.status(200).json(properties);
+      res.status(200).json(propertyAmenities);
     }
   } catch (error) {
     next(error);
