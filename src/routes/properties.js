@@ -4,15 +4,16 @@ import getPropertyById from "../services/properties/getPropertyById.js";
 import createProperty from "../services/properties/createProperty.js";
 import updateProperty from "../services/properties/updateProperty.js";
 import deleteProperty from "../services/properties/deleteProperty.js";
-import filterProperties from "../services/properties/filterProperties.js";
-import getPropertyWithAmenities from "../services/properties/getPropertyWithAmenities.js";
+//import filterProperties from "../services/properties/filterProperties.js";
+//import getPropertyWithAmenities from "../services/properties/getPropertyWithAmenities.js";
 import auth from "../utils/auth.js";
 
 const router = Router();
 
 router.get("/", async (req, res, next) => {
   try {
-    const properties = await getProperties();
+    const { location, pricePerNight, amenitis } = req.query;
+    const properties = await getProperties(location, pricePerNight, amenitis);
     res.json(properties);
   } catch (error) {
     next(error);
