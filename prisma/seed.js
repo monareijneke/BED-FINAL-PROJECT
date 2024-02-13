@@ -82,6 +82,11 @@ async function main() {
         host: {
           connect: { id: property.hostId },
         },
+        amenitis: {
+          connect: property.amenitis.ids.map(amenity => ({
+            id: amenity.id,
+          })),
+        },
       },
     });
   }
