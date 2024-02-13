@@ -2,7 +2,7 @@ import { PrismaClient } from "@prisma/client";
 
 const updateHost = async (id, updatedHost) => {
   const prisma = new PrismaClient();
-  const host = prisma.host.updateMany({
+  const host = await prisma.host.updateMany({
     where: { id },
     data: updatedHost,
   });
