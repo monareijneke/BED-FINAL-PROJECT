@@ -4,7 +4,6 @@ import createUser from "../services/users/createUser.js";
 import getUserById from "../services/users/getUserById.js";
 import updateUser from "../services/users/updateUser.js";
 import deleteUser from "../services/users/deleteUser.js";
-//import getUserByUsername from "../services/users/getUserByUsername.js";
 import auth from "../utils/auth.js";
 
 const router = Router();

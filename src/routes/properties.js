@@ -4,8 +4,6 @@ import getPropertyById from "../services/properties/getPropertyById.js";
 import createProperty from "../services/properties/createProperty.js";
 import updateProperty from "../services/properties/updateProperty.js";
 import deleteProperty from "../services/properties/deleteProperty.js";
-//import filterProperties from "../services/properties/filterProperties.js";
-//import getPropertyWithAmenities from "../services/properties/getPropertyWithAmenities.js";
 import auth from "../utils/auth.js";
 
 const router = Router();
@@ -31,23 +29,6 @@ router.get("/:id", async (req, res, next) => {
         .json({ message: `could not find property with id ${id}!` });
     } else {
       res.status(200).json(property);
-    }
-  } catch (error) {
-    next(error);
-  }
-});
-
-router.get("/:id/amenities", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    const propertyAmenities = await getPropertyWithAmenities(id);
-
-    if (!propertyAmenities) {
-      res
-        .status(404)
-        .json({ message: `Not found any property with these requirements` });
-    } else {
-      res.status(200).json(propertyAmenities);
     }
   } catch (error) {
     next(error);
@@ -112,7 +93,7 @@ router.put("/:id", auth, async (req, res, next) => {
     if (!property) {
       res.status(404).json({ message: `Property with id ${id} not found!` });
     } else {
-      res.status(201).json({ message: `Property succesfully updated!` });
+      res.status(200).json({ message: `Property succesfully updated!` });
     }
   } catch (error) {
     next(error);
