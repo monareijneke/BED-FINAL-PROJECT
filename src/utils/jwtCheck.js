@@ -7,14 +7,3 @@ const jwtCheck = auth({
 });
 
 export default jwtCheck;
-
-// enforce on all endpoints
-// app.use(jwtCheck);
-
-// app.get("/authorized", function (req, res) {
-//   res.send("Secured Resource");
-// });
-
-// app.listen(port);
-
-// console.log("Running on port ", port);
