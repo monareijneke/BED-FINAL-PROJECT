@@ -21,5 +21,6 @@ const createHost = async (
       aboutMe,
     },
   });
+  return host;
 };
 export default createHost;
