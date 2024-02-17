@@ -66,6 +66,11 @@ async function main() {
   }
 
   for (const property of properties) {
+    const existingAmenities = await prisma.amenity.findMany();
+    const amenitiesToConnect = existingAmenities.filter(amenity =>
+      property.amenitis.includes(amenity.name)
+    );
+    const amenityIds = amenitiesToConnect.map(amenity => ({ id: amenity.id }));
     await prisma.property.upsert({
       where: { id: property.id },
       update: {},
@@ -81,6 +86,9 @@ async function main() {
         rating: property.rating,
         host: {
           connect: { id: property.hostId },
+        },
+        amenitis: {
+          connect: amenityIds,
         },
       },
     });
