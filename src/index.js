@@ -10,7 +10,6 @@ import propertiesRouter from "../src/routes/properties.js";
 import amenitiesRouter from "../src/routes/amenities.js";
 import bookingsRouter from "../src/routes/bookings.js";
 import reviewsRouter from "../src/routes/reviews.js";
-//import jwtCheck from "../src/utils/jwtCheck.js";
 import errorHandler from "./utils/errorHandler.js";
 
 const app = express();
@@ -30,20 +29,12 @@ Sentry.init({
   profilesSampleRate: 1.0,
 });
 
-// The request handler must be the first middleware on the app
 app.use(Sentry.Handlers.requestHandler());
-
-// TracingHandler creates a trace for every incoming request
 app.use(Sentry.Handlers.tracingHandler());
-
-// app.get("/", (req, res) => {
-//   res.send("Hello world!");
-// });
 
 app.use(express.json());
 app.use(log);
 
-//app.use(jwtCheck);
 app.use("/login", loginRouter);
 app.use("/users", usersRouter);
 app.use("/hosts", hostsRouter);
