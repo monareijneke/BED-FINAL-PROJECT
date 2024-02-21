@@ -1,35 +1,35 @@
 {
   "amenities": [
     {
-      "id": "l4567890-12gh-ijkl-1234-56789abcdef0",
+      "id": "1",
       "name": "Wifi"
     },
     {
-      "id": "m5678901-23ij-klmn-2345-6789abcdef01",
+      "id": "2",
       "name": "Gym"
     },
     {
-      "id": "n6789012-34kl-mnop-3456-789abcdef012",
+      "id": "3",
       "name": "Pool"
     },
     {
-      "id": "o7890123-45lm-nopq-4567-89abcdef0123",
+      "id": "4",
       "name": "Kitchen"
     },
     {
-      "id": "p8901234-56mn-opqr-5678-9abcdef01234",
+      "id": "5",
       "name": "Air Conditioning"
     },
     {
-      "id": "q9012345-67no-pqrs-6789-abcdef012345",
+      "id": "6",
       "name": "Heating"
     },
     {
-      "id": "r0123456-78op-qrst-789a-bcdef0123456",
+      "id": "7",
       "name": "Washer"
     },
     {
-      "id": "s1234567-89pq-rstu-89ab-cdef01234567",
+      "id": "8",
       "name": "Dryer"
     },
     {
