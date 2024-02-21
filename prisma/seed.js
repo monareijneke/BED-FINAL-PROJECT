@@ -28,15 +28,7 @@ async function main() {
     await prisma.user.upsert({
       where: { id: user.id },
       update: {},
-      create: {
-        id: user.id,
-        username: user.username,
-        password: user.password,
-        name: user.name,
-        email: user.email,
-        phoneNumber: user.phoneNumber,
-        profilePicture: user.profilePicture,
-      },
+      create: user,
     });
   }
 
