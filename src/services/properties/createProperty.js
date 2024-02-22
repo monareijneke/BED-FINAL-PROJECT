@@ -9,7 +9,8 @@ const createProperty = async (
   bedroomCount,
   bathRoomCount,
   maxGuestCount,
-  rating
+  rating,
+  amenitis
 ) => {
   const prisma = new PrismaClient();
   const property = await prisma.property.create({
@@ -23,6 +24,7 @@ const createProperty = async (
       bathRoomCount,
       maxGuestCount,
       rating,
+      amenitis,
     },
   });
 
