@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   try {
     const { location, pricePerNight, amenitis } = req.query;
     const properties = await getProperties(location, pricePerNight, amenitis);
-    res.json(properties);
+    res.status(200).json(properties);
   } catch (error) {
     next(error);
   }
@@ -47,6 +47,7 @@ router.post("/", auth, async (req, res, next) => {
       bathRoomCount,
       maxGuestCount,
       rating,
+      amenitis,
     } = req.body;
     const newProperty = await createProperty(
       hostId,
@@ -57,9 +58,14 @@ router.post("/", auth, async (req, res, next) => {
       bedroomCount,
       bathRoomCount,
       maxGuestCount,
-      rating
+      rating,
+      amenitis
     );
-    res.status(201).json(newProperty);
+    if (!newProperty) {
+      res.status(400).json({ message: `Bad Request!` });
+    } else {
+      res.status(201).json(newProperty);
+    }
   } catch (error) {
     next(error);
   }

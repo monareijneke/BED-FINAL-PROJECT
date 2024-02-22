@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   try {
     const { name } = req.query;
     const hosts = await getHosts(name);
-    res.json(hosts);
+    res.status(200).json(hosts);
   } catch (error) {
     next(error);
   }
@@ -53,7 +53,11 @@ router.post("/", auth, async (req, res, next) => {
       profilePicture,
       aboutMe
     );
-    res.status(201).json(newHost);
+    if (!newHost) {
+      res.status(400).json({ message: `Bad Request!` });
+    } else {
+      res.status(201).json(newHost);
+    }
   } catch (error) {
     next(error);
   }

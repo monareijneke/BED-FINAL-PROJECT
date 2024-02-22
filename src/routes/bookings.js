@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   try {
     const { userId } = req.query;
     const bookings = await getBookings(userId);
-    res.json(bookings);
+    res.status(200).json(bookings);
   } catch (error) {
     next(error);
   }
@@ -53,7 +53,11 @@ router.post("/", auth, async (req, res, next) => {
       totalPrice,
       bookingStatus
     );
-    res.status(201).json(newBooking);
+    if (!newBooking) {
+      res.status(400).json({ message: `Bad request!` });
+    } else {
+      res.status(201).json(newBooking);
+    }
   } catch (error) {
     next(error);
   }

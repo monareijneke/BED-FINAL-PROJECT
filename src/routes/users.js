@@ -12,7 +12,7 @@ router.get("/", async (req, res, next) => {
   try {
     const { username, email } = req.query;
     const users = await getUsers(username, email);
-    res.json(users);
+    res.status(200).json(users);
   } catch (error) {
     next(error);
   }
@@ -45,7 +45,11 @@ router.post("/", auth, async (req, res, next) => {
       phoneNumber,
       profilePicture
     );
-    res.status(201).json(newUser);
+    if (!newUser) {
+      res.status(400).json({ message: `Bad Request!` });
+    } else {
+      res.status(201).json(newUser);
+    }
   } catch (error) {
     next(error);
   }

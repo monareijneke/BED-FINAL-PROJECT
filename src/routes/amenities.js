@@ -11,7 +11,7 @@ const router = Router();
 router.get("/", async (req, res, next) => {
   try {
     const amenities = await getAmenities();
-    res.json(amenities);
+    res.status(200).json(amenities);
   } catch (error) {
     next(error);
   }
@@ -35,7 +35,11 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { name } = req.body;
     const newAmenity = await createAmenity(name);
-    res.status(201).json(newAmenity);
+    if (!newAmenity) {
+      res.status(400).json({ message: `Bad request!` });
+    } else {
+      res.status(201).json(newAmenity);
+    }
   } catch (error) {
     next(error);
   }

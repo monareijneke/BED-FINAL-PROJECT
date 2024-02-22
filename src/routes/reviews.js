@@ -11,7 +11,7 @@ const router = Router();
 router.get("/", async (req, res, next) => {
   try {
     const reviews = await getReviews();
-    res.json(reviews);
+    res.status(200).json(reviews);
   } catch (error) {
     next(error);
   }
@@ -36,7 +36,11 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { userId, propertyId, rating, comment } = req.body;
     const newReview = await createReview(userId, propertyId, rating, comment);
-    res.status(201).json(newReview);
+    if (!newReview) {
+      res.status(400).json({ message: `Bad Request!` });
+    } else {
+      res.status(201).json(newReview);
+    }
   } catch (error) {
     next(error);
   }
