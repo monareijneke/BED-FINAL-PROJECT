@@ -36,12 +36,9 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { userId, propertyId, rating, comment } = req.body;
     const newReview = await createReview(userId, propertyId, rating, comment);
-    if (!newReview) {
-      res.status(400).json({ message: `Bad Request!` });
-    } else {
-      res.status(201).json(newReview);
-    }
+    res.status(201).json(newReview);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });

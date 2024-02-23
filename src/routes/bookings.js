@@ -44,6 +44,7 @@ router.post("/", auth, async (req, res, next) => {
       totalPrice,
       bookingStatus,
     } = req.body;
+
     const newBooking = await createBooking(
       userId,
       propertyId,
@@ -53,12 +54,10 @@ router.post("/", auth, async (req, res, next) => {
       totalPrice,
       bookingStatus
     );
-    if (!newBooking) {
-      res.status(400).json({ message: `Bad request!` });
-    } else {
-      res.status(201).json(newBooking);
-    }
+
+    res.status(201).json(newBooking);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });

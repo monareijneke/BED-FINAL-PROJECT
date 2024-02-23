@@ -35,12 +35,9 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { name } = req.body;
     const newAmenity = await createAmenity(name);
-    if (!newAmenity) {
-      res.status(400).json({ message: `Bad request!` });
-    } else {
-      res.status(201).json(newAmenity);
-    }
+    res.status(201).json(newAmenity);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });

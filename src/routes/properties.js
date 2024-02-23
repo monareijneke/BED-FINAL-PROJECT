@@ -49,6 +49,7 @@ router.post("/", auth, async (req, res, next) => {
       rating,
       amenitis,
     } = req.body;
+
     const newProperty = await createProperty(
       hostId,
       title,
@@ -61,12 +62,10 @@ router.post("/", auth, async (req, res, next) => {
       rating,
       amenitis
     );
-    if (!newProperty) {
-      res.status(400).json({ message: `Bad Request!` });
-    } else {
-      res.status(201).json(newProperty);
-    }
+
+    res.status(201).json(newProperty);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });

@@ -44,6 +44,7 @@ router.post("/", auth, async (req, res, next) => {
       profilePicture,
       aboutMe,
     } = req.body;
+
     const newHost = await createHost(
       username,
       password,
@@ -53,12 +54,10 @@ router.post("/", auth, async (req, res, next) => {
       profilePicture,
       aboutMe
     );
-    if (!newHost) {
-      res.status(400).json({ message: `Bad Request!` });
-    } else {
-      res.status(201).json(newHost);
-    }
+
+    res.status(201).json(newHost);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });

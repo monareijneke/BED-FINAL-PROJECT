@@ -37,6 +37,7 @@ router.post("/", auth, async (req, res, next) => {
   try {
     const { username, password, name, email, phoneNumber, profilePicture } =
       req.body;
+
     const newUser = await createUser(
       username,
       password,
@@ -45,12 +46,9 @@ router.post("/", auth, async (req, res, next) => {
       phoneNumber,
       profilePicture
     );
-    if (!newUser) {
-      res.status(400).json({ message: `Bad Request!` });
-    } else {
-      res.status(201).json(newUser);
-    }
+    res.status(201).json(newUser);
   } catch (error) {
+    res.status(400).json({ message: "Incomplete information provided" });
     next(error);
   }
 });
